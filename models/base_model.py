@@ -7,6 +7,7 @@ A module to the BaseModel class
 from uuid import uuid4
 from datetime import datetime
 
+
 class BaseModel:
     """
     Defines all common attributes/methods for other classes
@@ -33,8 +34,8 @@ class BaseModel:
 
         """
         Returns the string representation of BaseModel object.
-        [<class name>] (<self.id>) <self.__dict__>
-        """
+        [<class name>] (<self.id>) <self.__dict__>"""
+
         return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
@@ -51,7 +52,7 @@ class BaseModel:
         of the instance:
 
         - only instance attributes set will be returned
-        - a key __class__ is added with the class name of the object
+        - key __class__ is added with the class name of object
         - created_at and updated_at must be converted to string object in ISO object
         """
         dict_1 = self.__dict__.copy()
