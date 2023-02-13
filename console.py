@@ -8,8 +8,6 @@ import re
 
 from shlex import split
 
-
-
 import models
 
 from models.base_model import BaseModel
@@ -25,8 +23,6 @@ from models.place import Place
 from models.state import State
 
 from models.review import Review
-
-
 
 # A global constant since both functions within and outside uses it.
 
@@ -47,9 +43,6 @@ CLASSES = [
     "Review"
 
 ]
-
-
-
 
 
 def parse(arg):
@@ -85,64 +78,39 @@ def parse(arg):
         return retl
 
 
-
-
-
 def check_args(args):
 
     """checks if args is valid
-
     Args:
-
         args (str): the string containing the arguments passed to a command
-
     Returns:
-
         Error message if args is None or not a valid class, else the arguments
-
     """
 
     arg_list = parse(args)
 
-
-
     if len(arg_list) == 0:
-
         print("** class name missing **")
-
     elif arg_list[0] not in CLASSES:
-
         print("** class doesn't exist **")
-
     else:
-
         return arg_list
-
-
-
 
 
 class HBNBCommand(cmd.Cmd):
 
-    """The class that implements the console
-
-    for the AirBnB clone web application
-
     """
-
+    The class that implements the console
+    for the AirBnB clone web application
+    """
     prompt = "(hbnb) "
-
     storage = models.storage
 
-
-
     def emptyline(self):
-
-        """Command to executed when empty line + <ENTER> key"""
-
+        """
+        Command to executed when empty line + <ENTER> key
+        """
         pass
-
-
 
     def default(self, arg):
 
@@ -164,8 +132,6 @@ class HBNBCommand(cmd.Cmd):
 
         }
 
-
-
         match = re.search(r"\.", arg)
 
         if match:
@@ -184,13 +150,9 @@ class HBNBCommand(cmd.Cmd):
 
                     return action_map[command[0]](call)
 
-
-
         print("*** Unknown syntax: {}".format(arg))
 
         return False
-
-
 
     def do_EOF(self, argv):
 
@@ -200,15 +162,11 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
-
-
     def do_quit(self, argv):
 
         """When executed, exits the console."""
 
         return True
-
-
 
     def do_create(self, argv):
 
@@ -223,8 +181,6 @@ class HBNBCommand(cmd.Cmd):
             print(eval(args[0])().id)
 
             self.storage.save()
-
-
 
     def do_show(self, argv):
 
@@ -252,35 +208,22 @@ class HBNBCommand(cmd.Cmd):
 
                     print(self.storage.all()[key])
 
-
-
     def do_all(self, argv):
 
         """Prints all string representation of all instances based or not
-
         based on the class name"""
 
         arg_list = split(argv)
-
         objects = self.storage.all().values()
 
         if not arg_list:
-
             print([str(obj) for obj in objects])
-
         else:
-
             if arg_list[0] not in CLASSES:
-
                 print("** class doesn't exist **")
-
             else:
-
                 print([str(obj) for obj in objects
-
                        if arg_list[0] in str(obj)])
-
-
 
     def do_destroy(self, argv):
 
@@ -307,8 +250,6 @@ class HBNBCommand(cmd.Cmd):
                 else:
 
                     print("** no instance found **")
-
-
 
     def do_update(self, argv):
 
@@ -348,11 +289,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
 
-
-
             self.storage.save()
-
-
 
     def do_count(self, arg):
         """Retrieve the number of instances of a class"""
