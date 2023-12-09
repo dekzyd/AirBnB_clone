@@ -37,4 +37,4 @@ class BaseModel:
         dictionary['__class__'] = type(self).__name__
         dictionary['updated_at'] = dictionary['updated_at'].isoformat()
         dictionary['created_at'] = dictionary['created_at'].isoformat()
-        return dictionar
+        return dictionary
