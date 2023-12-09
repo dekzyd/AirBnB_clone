@@ -24,12 +24,16 @@ class BaseModel:
 
     def __str__(self):
         '''representation of the object as a string'''
-        strfmt = type(self).__name__, self.id, self.__dict__
-        return "[{}] ({}) {}".format(strfmt)
+        return "[{}] ({}) {}".format(
+                type(self).__name__,
+                self.id, self.__dict__
+                    )
 
     def save(self):
         '''saves the object'''
+        from models import storage
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         '''shows all object attributes in dictionary format'''
