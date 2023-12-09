@@ -24,8 +24,10 @@ class BaseModel:
 
     def __str__(self):
         '''representation of the object as a string'''
-        strfmt = type(self).__name__, self.id, self.__dict__
-        return "[{}] ({}) {}".format(strfmt)
+        return "[{}] ({}) {}".format(
+                type(self).__name__,
+                self.id, self.__dict__
+                    )
 
     def save(self):
         '''saves the object'''
