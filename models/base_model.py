@@ -41,7 +41,7 @@ class BaseModel:
     def to_dict(self):
         """Shows all object attributes in dictionary format"""
         dictionary = self.__dict__.copy()
-        dictionary['__class__'] = type(self).__name__
-        dictionary['updated_at'] = dictionary['updated_at'].isoformat()
-        dictionary['created_at'] = dictionary['created_at'].isoformat()
+        dictionary["__class__"] = type(self).__name__
+        dictionary["updated_at"] = dictionary["updated_at"].isoformat()
+        dictionary["created_at"] = dictionary["created_at"].isoformat()
         return dictionary
