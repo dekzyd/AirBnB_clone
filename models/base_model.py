@@ -2,13 +2,13 @@
 
 import uuid
 from datetime import datetime
-'''defines all common attributes/methods for other classes'''
+"""Defines all common attributes/methods for other classes"""
 
 
 class BaseModel:
-    '''creates a basemodel for other classes'''
+    """Creates a basemodel for other classes"""
     def __init__(self, *args, **kwargs):
-        '''initializes a basemodel object'''
+        """Initializes a basemodel object"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -23,20 +23,20 @@ class BaseModel:
                         setattr(self, key, value)
 
     def __str__(self):
-        '''representation of the object as a string'''
+        """Representation of the object as a string"""
         return "[{}] ({}) {}".format(
                 type(self).__name__,
                 self.id, self.__dict__
                     )
 
     def save(self):
-        '''saves the object'''
+        """Saves the object"""
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
-        '''shows all object attributes in dictionary format'''
+        """Shows all object attributes in dictionary format"""
         dictionary = self.__dict__
         dictionary['__class__'] = type(self).__name__
         dictionary['updated_at'] = dictionary['updated_at'].isoformat()
