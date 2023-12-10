@@ -3,6 +3,10 @@
 "Filestorage class model"
 import json
 
+from models.base_model import BaseModel
+
+classes = {"BaseModel": BaseModel}
+
 
 class FileStorage:
     """serializes instances to a JSON file
@@ -31,8 +35,8 @@ class FileStorage:
         "deserializes the JSON file to __objects"
         try:
             with open(self.__file_path, mode='r') as file:
-                json_obj = json.load(file)
-                for key in json_obj:
-                    self.__objects[key] = classes[json_obj[key]["__class__"]](**json_obj[key])
+                js_ob = json.load(file)
+            for k in js_ob:
+                self.__objects[k] = classes[js_ob[k]["__class__"]](**js_ob[k])
         except Exception as e:
             pass
