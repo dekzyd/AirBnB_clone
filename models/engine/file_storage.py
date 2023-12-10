@@ -5,8 +5,8 @@ import json
 
 
 class FileStorage:
-    "serializes instances to a JSON file
-    and deserializes JSON file to instances"
+    """serializes instances to a JSON file
+    and deserializes JSON file to instances"""
 
     __file_path = "file.json"
     __objects = {}
@@ -21,17 +21,18 @@ class FileStorage:
 
     def save(self):
         "serializes __objects and saves them in JSON format"
-        with open(__file_path, mode='w') as file:
+        with open(self.__file_path, mode='w') as file:
             store = {}
             for key, val in self.__objects.items():
                 store[key] = val.to_dict()
-            json.dump(store, f)
+            json.dump(store, file)
 
     def reload(self):
         "deserializes the JSON file to __objects"
         try:
             with open(self.__file_path, mode='r') as file:
                 json_obj = json.load(file)
-                return json_obj
+                for key in json_obj:
+                    self.__objects[key] = classes[json_obj[key]["__class__"]](**json_obj[key])
         except Exception as e:
             pass
