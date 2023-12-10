@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import uuid
-from models import storage
 from datetime import datetime
 '''defines all common attributes/methods for other classes'''
 
@@ -11,6 +10,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         '''initializes a basemodel object'''
 
+        from models import storage
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -34,6 +34,7 @@ class BaseModel:
 
     def save(self):
         '''saves the object'''
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
