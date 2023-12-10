@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"Filestorage class model"
+"""Filestorage class model"""
 import json
 
 from models.base_model import BaseModel
@@ -25,15 +25,15 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        "returns the dictionary __objects"
+        """returns the dictionary __objects"""
         return self.__objects
 
     def new(self, obj):
-        "sets the obj with key <obj class name>.id in __objects dictionary"
+        """sets the obj with key <obj class name>.id in __objects dictionary"""
         self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-        "serializes __objects and saves them in JSON format"
+        """serializes __objects and saves them in JSON format"""
         with open(self.__file_path, mode='w') as file:
             store = {}
             for key, val in self.__objects.items():
@@ -41,7 +41,7 @@ class FileStorage:
             json.dump(store, file)
 
     def reload(self):
-        "deserializes the JSON file to __objects"
+        """deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, mode='r') as file:
                 js_ob = json.load(file)
