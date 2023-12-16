@@ -2,18 +2,31 @@
 """Defines the console"""
 
 import cmd
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    pass
+    """Defines the hbnb command interpreter"""
 
     prompt = "(hbnb) "
 
-    def do_quit(self, arg):
+    def do_create(self, line):
+        """Creates an instance.
+        """
+        if line == "" or line is None:
+            print("** class name missing **")
+        elif line not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            cr = storage.classes()[line]()
+            cr.save()
+            print(cr.id)
+
+    def do_quit(self, line):
         """Quit command to exit the program"""
         return True
 
-    def do_EOF(self, arg):
+    def do_EOF(self, line):
         """EOF command to exit the program"""
         return True
 
